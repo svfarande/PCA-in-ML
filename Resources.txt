@@ -1,0 +1,2 @@
+http://www.mml-book.com/ 
+Bishop: Pattern Recognition and Machine Learning, MIT Press, 2006, Chapter 12.1
