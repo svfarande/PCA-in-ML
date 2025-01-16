@@ -23,6 +23,7 @@
   - [Reformulation of the PCA Objective](#reformulation-of-the-pca-objective)
   - [Finding the optimal basis vectors that span the principal subspace](#finding-the-optimal-basis-vectors-that-span-the-principal-subspace)
   - [Steps of PCA](#steps-of-pca)
+  - [PCA in High Dimensions](#pca-in-high-dimensions)
 
 
 # Week 1
@@ -285,3 +286,14 @@ where $B$ is the matrix that contains the eigenvectors that belong to the larges
 
 ## PCA in high dimensions
 
+Lets say we have $N$ data points given as $X_1, X_2 .... X_N$ having $D$ dimensions and $N < D$ having $Mean[X] = 0$. Then its data covariance matrix is given as $S_{D \times D} = \frac{1}{N}X^TX$ having $rank(S)=N$, where : $$X = 
+\left(\begin{array}{cc} 
+X_1^T\\
+X_2^T\\
+\..\\
+X_N^T\\
+\end{array}\right)_{N\times D}$$
+
+From equation (14) we have $Sb_i = \lambda_i b_i$ where $b_i$ is a basis vector of the orthogonal complement of the principal subspace. Now substituting the value of $S$ in this equation and multiplying by $X$ from left we get : $$\frac{1}{N}XX^TXb_i = \lambda_iXb_i$$ Now this is eigenvector eigenvalue equation where eigenvalue $ = \lambda_i$ and eigenvector $ = Xb_i = c_i$ of $N \times N$ matrix $\frac{1}{N}XX^T$. To get orignal eigenvector and eigenvalue for our PCA we need to left multiply by $X^T$ : $$\frac{1}{N}X^TXX^Tc_i = \lambda_iX^Tc_i$$ the first part is $S$ : $$SX^Tc_i = \lambda_iX^Tc_i$$  this also means that in above equation we recover $X^Tc_i$ as an eigenvector of $S$ that belongs to the eigenvalue $\lambda_i$. 
+
+The eigenvectors $X^Tc_i$ are not normalized. In order to use the PCA algorithm we need to normalize them, such that $||X^Tc_i|| = 1$. Otherwise, we will need to adjust our PCA derivation (we won't be able to exploit the ONB Ortho Normal Basis properties).
